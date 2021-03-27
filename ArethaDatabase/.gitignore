@@ -4,3 +4,6 @@ node_modules/
 # production bundles
 dist/
 public/js/app.js
+
+# configuration details
+src/server/config
