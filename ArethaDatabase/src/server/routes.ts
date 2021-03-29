@@ -7,9 +7,10 @@ router.get('/api/hello', (req, res, next) => {
     res.json('World');
 });
 
-router.get('/api/actions', async (req, res) => {
+router.get('/api/actions/:timestamp?/:name?', async (req, res) => {
     try {
-        let blogs = await DB.Actions.all()
+        //console.log(req.params.name + " " + req.params.timestamp)
+        let blogs = await DB.Actions.query(req.params.name, req.params.timestamp)
         res.json(blogs)
     } catch(e) {
         console.log(e)

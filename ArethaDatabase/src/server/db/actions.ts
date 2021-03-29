@@ -1,8 +1,12 @@
 import { Connection } from './index'
 
-export const all = async() => {
+export async function query(actionName, actionTimestamp){ 
+    let query = 'SELECT * FROM actions WHERE actionTimestamp >= '
+     + (actionTimestamp != undefined ? actionTimestamp.toString() : '0')
+     + (actionName != undefined ? ' AND actionName = "' + actionName.toString() + '"' : "")
+    //console.log(query)
     return new Promise((resolve, reject) => {
-        Connection.query('SELECT * FROM actions', (err, results) => {
+        Connection.query(query, (err, results) => {
             if(err) return reject(err)
             resolve(results)
         })
@@ -10,5 +14,5 @@ export const all = async() => {
 }
 
 export default{
-    all
+    query
 }
