@@ -15,4 +15,6 @@ CREATE TABLE actions
     INSERT INTO actions
         (actionTimestamp, actionName, actionDescription)
     VALUES
-        (0, "Sleep", '{"how well": "very well"}');
+        (0, "Sleep", null);
+
+        {"how well": "very well"}
