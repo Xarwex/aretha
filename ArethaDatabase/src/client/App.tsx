@@ -11,7 +11,7 @@ const App = (props: AppProps) => {
 				const query = '/miniql/' + exampleQuery.text.replace(/(\r\n|\n|\r|\s)/gm, "")
 				console.log(query)
 				//const demoRes = await fetch(query)
-				const demoQuery = await fetch('/api/actions/0')
+				const demoQuery = await fetch(query)
 				const demoRes = await demoQuery.json()
 				console.log(demoRes)
 				setGreeting(JSON.stringify(demoRes));
