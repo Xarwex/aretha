@@ -1,19 +1,20 @@
 {
     "compilerOptions": {
-        "outDir": "./public/js/",
+        "outDir": "./dist/",
         "noImplicitAny": false,
-        "module": "es6",
-        "moduleResolution": "node",
+        "module": "commonjs",
         "target": "es6",
-        "jsx": "react",
         "allowSyntheticDefaultImports": true,
         "lib": [
-            "es2015",
-            "dom"
+            "es2017"
+        ],
+        "types": [
+            "node",
+            "express"
         ]
     },
     "include": [
-        "src/client/**/*"
+        "src/server/**/*"
     ],
     "exclude": [
         "node_modules"

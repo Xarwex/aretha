@@ -1,32 +1,42 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import exampleQuery from './../queries/get-all-actions'
 
-/* HOOK REACT EXAMPLE */
 const App = (props: AppProps) => {
-	const [greeting, setGreeting] = useState<string>('');
+	const [appList, setAppList] = useState<JSON>(JSON.parse("{}"))
 
 	useEffect(() => {
-		async function getGreeting() {
-			try {
-				const query = '/miniql/' + exampleQuery.text.replace(/(\r\n|\n|\r|\s)/gm, "")
-				console.log(query)
-				const demoQuery = await fetch(query)
-				const demoRes = await demoQuery.json()
-				console.log(demoRes)
-				setGreeting(JSON.stringify(demoRes));
-			} catch (error) {
-				console.log(error);
-			}
+		function getAppList() {
+			fetch('/apps')
+				.then(response => response.json())
+				.then(data => setAppList(data))
+				.catch(e => console.error(e))
 		}
-		getGreeting();
-	}, []);
+		getAppList()
+	}, [])
 
 	return (
-		<main className="container my-5">
-			<h1 className="text-primary text-center">{greeting}</h1>
+		<main>
+			<h1> Aretha Registry </h1>
+			<table cellPadding={5}>
+				<thead>
+					<tr>
+						<td>App</td>
+						<td>Port</td>
+					</tr>
+				</thead>
+				<tbody>
+					{
+						Object.keys(appList).map(function (name) {
+							return <tr>
+								<td>{name}</td>
+								<td>{appList[name]}</td>
+							</tr>
+						})
+					}
+				</tbody>
+			</table>
 		</main>
-	);
+	)
 };
 
 interface AppProps { }
