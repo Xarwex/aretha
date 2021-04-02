@@ -1,12 +1,9 @@
 import * as express from 'express';
 import * as fetch from 'node-fetch'
+import { port } from './server'
 
 const router = express.Router();
 let appMap: Map<string, number> = new Map()
-
-router.get('/api/hello', (req, res, next) => {
-    res.json('World');
-});
 
 router.put('/alive/:appname/:port', async (req, res) => {
     try {
@@ -41,6 +38,10 @@ router.get('/init', async (req, res) => {
     appMap.set("app1", 3003)
     appMap.set("app2", 3002)
     res.sendStatus(200)
+})
+
+router.get('/port', async (req, res) => {
+    res.json(port)
 })
 
 async function removeDeadApps() {

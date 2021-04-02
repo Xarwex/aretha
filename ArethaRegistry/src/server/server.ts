@@ -6,5 +6,5 @@ const app = express();
 app.use(express.static('public'));
 app.use(apiRouter);
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Server listening on port: ${port}`));
+const server = app.listen(process.env.PORT || 3000, () => console.log(`Server listening on port: ${server.address().port}`));
+export const port = server.address().port

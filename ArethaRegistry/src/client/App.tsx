@@ -1,8 +1,10 @@
+import { response } from 'express';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 
 const App = (props: AppProps) => {
 	const [appList, setAppList] = useState<JSON>(JSON.parse("{}"))
+	const [port, setPort] = useState(-1)
 
 	useEffect(() => {
 		function getAppList() {
@@ -11,12 +13,17 @@ const App = (props: AppProps) => {
 				.then(data => setAppList(data))
 				.catch(e => console.error(e))
 		}
-		getAppList()
+		const interval = setInterval(getAppList, 1000)
+		fetch('/port')
+			.then(response => response.json())
+			.then(data => setPort(data))
+			.catch(e => console.error(e))
+		return () => clearInterval(interval)
 	}, [])
 
 	return (
 		<main>
-			<h1> Aretha Registry </h1>
+			<h1> Aretha Registry :{port}</h1>
 			<table cellPadding={5}>
 				<thead>
 					<tr>

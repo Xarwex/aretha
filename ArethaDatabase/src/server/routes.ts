@@ -3,6 +3,7 @@ import DB from './db'
 import { queryResolver } from './QueryResolver'
 import { miniql } from 'miniql'
 import * as fetch from 'node-fetch'
+import { port } from './server'
 
 const router = express.Router()
 
@@ -37,7 +38,7 @@ router.get('/isAlive', async (req, res) => {
 
 router.put('/signal', async (req, res) => {
     try {
-        let signal = await fetch("http://localhost:3000/alive/arethadb/3001", {
+        let signal = await fetch("http://localhost:3000/alive/arethadb/" + port, {
             method: 'PUT'
         })
         res.sendStatus(200)
