@@ -3,14 +3,15 @@ import * as fetch from 'node-fetch'
 import { port } from './server'
 
 const router = express.Router();
-let appMap: Map<string, number> = new Map()
+let appMap: Map<string, URL> = new Map()
 
-router.put('/alive/:appname/:port', async (req, res) => {
+router.put('/alive', async (req, res) => {
     try {
-        let name: string = req.params.appname
-        let port: number = Number(req.params.port)
-        appMap.set(name, port)
-        console.log("Map entry: " + name + " " + port)
+        let name: string = String(req.query.name)
+        let url: URL = new URL(String(req.query.url))
+        console.log(name)
+        appMap.set(name, url)
+        console.log("Map entry: " + name + " " + url)
         console.log(appMap.size)
         res.sendStatus(200)
     } catch (e) {
@@ -35,8 +36,10 @@ router.get('/apps', async (req, res) => {
 
 // To check if everything works - remove later
 router.get('/init', async (req, res) => {
-    appMap.set("app1", 3003)
-    appMap.set("app2", 3002)
+    let url1 = new URL("http://localhost:3003")
+    let url2 = new URL("http://localhost:3002")
+    appMap.set("app1", url1)
+    appMap.set("app2", url2)
     res.sendStatus(200)
 })
 
@@ -47,7 +50,7 @@ router.get('/port', async (req, res) => {
 async function removeDeadApps() {
     let inactiveList: Array<string> = new Array()
     for (let [key, value] of appMap) {
-        await fetch('http://localhost:' + value + '/isAlive')
+        await fetch(value + 'isAlive')
             .then(response => {
                 if (response.status != 200)
                     inactiveList.push(key)

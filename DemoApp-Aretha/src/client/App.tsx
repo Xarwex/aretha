@@ -1,49 +1,46 @@
-import { response } from 'express';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import arethaRegistryURL from './../../config/index'
 
+/* HOOK REACT EXAMPLE */
 const App = (props: AppProps) => {
-	const [appList, setAppList] = useState<JSON>(JSON.parse("{}"))
-	const [port, setPort] = useState(-1)
+	const [appNameList, setAppNameList] = useState<JSON>(JSON.parse("{}"))
 
 	useEffect(() => {
 		function getAppList() {
-			fetch('/apps')
+			fetch('/appNames')
 				.then(response => response.json())
-				.then(data => setAppList(data))
+				.then(data => {
+					setAppNameList(data)
+					console.log(data)
+				})
 				.catch(e => console.error(e))
 		}
 		const interval = setInterval(getAppList, 1000)
-		fetch('/port')
-			.then(response => response.json())
-			.then(data => setPort(data))
-			.catch(e => console.error(e))
 		return () => clearInterval(interval)
 	}, [])
 
 	return (
 		<main>
-			<h1> Aretha Registry :{port}</h1>
+			<h1> Demo app</h1>
 			<table cellPadding={5}>
 				<thead>
 					<tr>
-						<td>App</td>
-						<td>URL</td>
+						<td>Apps connected</td>
 					</tr>
 				</thead>
 				<tbody>
 					{
-						Object.keys(appList).map(function (name) {
+						Object.keys(appNameList).map(function (name) {
 							return <tr>
 								<td>{name}</td>
-								<td>{appList[name]}</td>
 							</tr>
 						})
 					}
 				</tbody>
 			</table>
 		</main>
-	)
+	);
 };
 
 interface AppProps { }

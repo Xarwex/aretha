@@ -4,6 +4,7 @@ import { queryResolver } from './QueryResolver'
 import { miniql } from 'miniql'
 import * as fetch from 'node-fetch'
 import { port } from './server'
+import arethaRegistryURL from './../../config/index'
 
 const router = express.Router()
 
@@ -38,8 +39,8 @@ router.get('/isAlive', async (req, res) => {
 
 router.put('/signal', async (req, res) => {
     try {
-        let signal = await fetch("http://localhost:3000/alive/arethadb/" + port, {
-            method: 'PUT'
+        let signal = await fetch(arethaRegistryURL + "/alive?name=arethaDB&url=" + encodeURIComponent("http://localhost:" + port), {
+            method: 'PUT',
         })
         res.sendStatus(200)
     } catch (e) {
