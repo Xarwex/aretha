@@ -1,0 +1,3 @@
+[submodule "demoapp-aretha"]
+	path = demoapp-aretha
+	url = https://github.com/Xarwex/demoapp-aretha
