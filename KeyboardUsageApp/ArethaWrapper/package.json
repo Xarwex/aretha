@@ -21,6 +21,7 @@
     "css-loader": "^5.1.1",
     "express": "^4.17.1",
     "keypress": "^0.2.1",
+    "miniql": "0.0.22",
     "node-fetch": "^2.6.1",
     "node-sass": "^5.0.0",
     "react": "^17.0.1",

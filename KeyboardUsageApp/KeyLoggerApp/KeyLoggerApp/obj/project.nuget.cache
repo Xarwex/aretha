@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "d/EUxZmEyFPGYRxV08w8BRIdA7MpmIT7NNweU4p88mHug4DvDxXgCDWPTg3HFUsFQFtUnKJeuMZRzTYMjqptGg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\oleks\\Repos\\aretha\\KeyboardUsageApp\\KeyloggerApp\\KeyLoggerApp\\KeyLoggerApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\oleks\\.nuget\\packages\\microsoft.netcore.dotnetapphost\\5.0.5\\microsoft.netcore.dotnetapphost.5.0.5.nupkg.sha512",
+    "C:\\Users\\oleks\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.14\\microsoft.netcore.app.host.win-x64.3.1.14.nupkg.sha512"
+  ],
+  "logs": []
+}
