@@ -1,5 +1,5 @@
 {
-  "name": "demoapp-aretha",
+  "name": "aretha-wrapper",
   "version": "1.0.0",
   "description": "",
   "main": "dist/server.js",

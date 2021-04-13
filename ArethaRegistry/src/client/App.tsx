@@ -10,7 +10,7 @@ const App = (props: AppProps) => {
 		function getAppList() {
 			fetch('/apps')
 				.then(response => response.json())
-				.then(data => setAppList(data))
+				.then(data => { console.log(data); setAppList(data) })
 				.catch(e => console.error(e))
 		}
 		const interval = setInterval(getAppList, 1000)
