@@ -54,6 +54,18 @@
 
         let output = null;
         let model = null;
+        let INTERVAL = 1000;
+
+        let emoJson = {
+            "interval": INTERVAL,
+            "angry": 0,
+            "disgust": 0,
+            "fear": 0,
+            "happy": 0,
+            "neutral": 0,
+            "sad": 0,
+            "surprise": 0
+        }
 
         async function predictEmotion(points) {
             let result = tf.tidy(() => {
@@ -117,7 +129,7 @@
 
             if (points) {
                 let emotion = await predictEmotion(points);
-                // send some data to another script - expose an api
+                emoJson[emotion]++
                 setText(`Detected: ${emotion}`);
             }
             else {
@@ -125,6 +137,18 @@
             }
 
             requestAnimationFrame(trackFace);
+        }
+
+        async function handleEmotions() {
+            console.log(emoJson)
+            await fetch("http://localhost:7993/emotions?json=" + JSON.stringify(emoJson), {
+                method: "PUT"
+            })
+                .then(res => console.log(res))
+                .catch(e => console.log(e))
+
+            Object.keys(emoJson).map(index => emoJson[index] = 0)
+            emoJson["interval"] = INTERVAL
         }
 
         (async () => {
@@ -157,6 +181,8 @@
             setText("Loaded!");
 
             trackFace();
+
+            setInterval(handleEmotions, INTERVAL)
         })();
     </script>
 </body>
