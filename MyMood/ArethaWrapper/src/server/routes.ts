@@ -3,6 +3,7 @@ import { port } from './server'
 import * as fetch from 'node-fetch'
 import { arethaRegistryURL, name, emoPath } from './../../config/index'
 import * as fs from 'fs'
+
 const router = express.Router();
 let emotionsSession: Emotions = {
     totalTime: 0,
@@ -69,7 +70,7 @@ router.put('/emotions', async (req, res) => {
 })
 
 router.get('/emotions/sesion', async (req, res) => {
-
+    res.
 })
 
 function addEmotion(emotions: Emotions, emoJson: JSON) {
