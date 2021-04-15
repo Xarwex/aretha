@@ -3,6 +3,7 @@ import { port } from './server'
 import * as fetch from 'node-fetch'
 import { arethaRegistryURL, name, emoPath } from './../../config/index'
 import * as fs from 'fs'
+import { miniql } from 'miniql'
 
 const router = express.Router();
 let emotionsSession: Emotions = {
@@ -69,9 +70,48 @@ router.put('/emotions', async (req, res) => {
     res.sendStatus(200)
 })
 
-router.get('/emotions/sesion', async (req, res) => {
-    res.
+router.get('/miniql/:query', async (req, res) => {
+    try {
+        let queryText: string = req.params.query
+        let query = JSON.parse(queryText);
+        const context = {}
+        let result = await miniql(query, queryResolver, { verbose: false });
+        console.log(result)
+        res.json(result)
+    } catch (e) {
+        console.error(e)
+        res.sendStatus(500)
+    }
 })
+
+/*
+{
+    "get": {
+        "emotion": {
+            "args": {
+                "type": "total"
+            }
+        }
+    }
+}
+*/
+
+
+export const queryResolver = {
+    get: {
+        emotion: {
+            invoke: async (args, context) => {
+                console.log(args)
+                if (args.type == "session")
+                    return emotionsSession
+                if (args.type == 'total')
+                    return emotionsTotal
+
+            }
+        }
+    }
+}
+
 
 function addEmotion(emotions: Emotions, emoJson: JSON) {
     let interval: number = emoJson["interval"] / 1000
