@@ -66,7 +66,7 @@ router.put('/emotions', async (req, res) => {
     let emoJson = JSON.parse(req.query.json.toString())
     addEmotion(emotionsSession, emoJson)
     addEmotion(emotionsTotal, emoJson)
-    fs.writeFile(emoPath, JSON.stringify(emotionsTotal), e => { if (e) console.error(e) })
+    //fs.writeFile(emoPath, JSON.stringify(emotionsTotal), e => { if (e) console.error(e) })
     res.sendStatus(200)
 })
 

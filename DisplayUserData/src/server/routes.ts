@@ -43,7 +43,7 @@ router.get('/ask/:query', async (req, res) => {
         let completed = 0
         let total = Object.keys(appsJson).length
         for (const element in appsJson) {
-            fetch(appsJson[element] + 'miniql/' + req.query)
+            fetch(appsJson[element] + 'miniql/' + req.params.query)
                 .then(response => response.json())
                 .then((data: JSON) => {
                     resMutex.acquire().then(release => {

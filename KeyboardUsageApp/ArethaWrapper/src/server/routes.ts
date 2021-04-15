@@ -8,7 +8,6 @@ import { miniql } from 'miniql'
 const router = express.Router();
 
 router.get('/isAlive', async (req, res) => {
-    console.log("I live")
     res.sendStatus(200)
 })
 

@@ -12,7 +12,6 @@ router.put('/alive', async (req, res) => {
         console.log(name)
         appMap.set(name, url)
         console.log("Map entry: " + name + " " + url)
-        console.log(appMap.size)
         res.sendStatus(200)
     } catch (e) {
         console.log(e)

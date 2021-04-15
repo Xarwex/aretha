@@ -1,4 +1,4 @@
 const arethaRegistryURL = 'http://localhost:3000'
-const name = 'demoApp'
+const name = 'DUD'
 
 export { arethaRegistryURL, name }
